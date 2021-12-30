@@ -1,0 +1,120 @@
+.header
+{
+    height: 72px;    
+    width: 90%;
+    border-bottom: 1px solid white;
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    z-index: 9;
+}
+.header > .header__logo > img
+{
+    background-color: white;
+    width: 50px;
+    border-radius: 50%;
+}
+.header > .header__options
+{
+    display: flex;
+    list-style-type: none;
+}
+.header > .header__options > li
+{
+    margin-left: 50px;
+}
+.header > .header__options > li:hover
+{
+    background-color: white;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.header > .open__menu
+{
+    display: none;
+}
+.header > .close__menu
+{
+    display: none;
+}
+.activeO
+{
+    background-color: white;
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+@media (max-width: 768px) {
+    .header
+    {
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+        position: fixed;
+        left: -94%;
+        width: 100%;
+        transition: left 0.5s linear;
+    }
+    .header > .header__logo
+    {
+        display: none;
+    }
+    .header > .close__menu
+    {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .header > .open__menu
+    {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    .header > .header__options
+    {
+        display: list-item;
+        text-align: center;
+        background-color: rgb(170, 168, 168);
+        color: black;
+        width: 80%;
+        font-weight: 600;
+        border-radius: 10px;
+    }
+    .header > .header__options > li
+    {
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
+    .header > .header__options > li:hover
+{
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.show__menu
+{
+    border: 2px solid white;
+    left: 0;
+    background-color: rgba(109, 107, 114, 0.945);
+    transition: left 0.3s linear;
+}
+}
