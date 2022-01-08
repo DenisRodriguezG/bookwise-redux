@@ -9,9 +9,25 @@ function Home(props) {
     const [ current, setCurrent ] = useState(0)
     const [ bookDestacado, setBookDestacado ] = useState([]);
     const [ allBooks, setAllBooks ] = useState([]);
-    const [ isThereDestacado, setIsThereDescado ] = useState(false)
+    const [ isThereDestacado, setIsThereDescado ] = useState(false);
+    const [ check, setCheck ] = useState(false);
     const bookLenght = allBooks.length - 1;
 
+    useEffect(() => {
+        let mm = window.matchMedia('(max-width: 768px)').media
+        window.addEventListener('resize', () => {
+            if(window.matchMedia('(max-width: 768px)').matches)
+        {
+            setCheck(true);
+            
+        }
+        else
+        {
+            setCheck(false);
+        }
+        })
+        
+    }, [])
     useEffect(() => {
         if(props.bookCine)
         {
@@ -36,6 +52,7 @@ function Home(props) {
     }
     const right = () => {
         setCurrent(current < bookLenght ? current + 1 : 0)
+        
     }
     console.log(current)
     return (
@@ -44,7 +61,7 @@ function Home(props) {
                 <div className="welcome">
                     <p>
                     Hello <b>{props.user.firstName} {props.user.lastName}</b> welcome to BookWise.<br/>
-                    In our website you found a lot of books.<br/>
+                    In our website you'll find many books.<br/>
                     We have books of programming, Science, Comics,etc.
                     This books is for you, because we want that you'll get
                     a lot of wise. The programming is very important in 
@@ -73,12 +90,72 @@ function Home(props) {
                 <div className="books__container" ref={booksContainer}>
                     {
                         allBooks.map((book, index) => {
-                            if(current === index){ 
-                            return <div className="books">
-                                <h3>{book.title}</h3>
+                            let titleBook = "";
+                            let authorBook = "";
+                            let titleBook2 = "";
+                            let authorBook2 = "";
+                            for(let i = 0; i < book.title.length; i++)
+                            {
+                                if(!check)
+                                {
+                                    if(i <= 20)
+                                {
+                                    titleBook += book.title[i];
+                                    
+                                    if(book.author.length >= 20 )
+                                    {
+                                        
+                                            authorBook += book.author[i];
+                                    }
+                                    else
+                                    {
+                                        authorBook = book.author;  
+                                    }
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                                }
+                                else
+                                {
+                                    if(i <= 10)
+                                {
+                                    titleBook2 += book.title[i];
+                                    if(book.author.length >= 10 )
+                                    {
+                                        
+                                            authorBook2 += book.author[i];
+                                    }
+                                    else
+                                    {
+                                        authorBook2 = book.author;  
+                                    }
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                                }
+                                
+                            }
+                            if(!check && current === index)
+                            {
+                                return <div className="books">
+                                <h3>{titleBook}...</h3>
                                 <img src={book.cover}/>
-                                <h3>{book.author}</h3>
-                            </div>}
+                                <h3>{authorBook}</h3>
+                                </div>
+                            }
+                            if(check)
+                            {
+                                return <div className="books">
+                                <h5>{titleBook2}...</h5>
+                                <img src={book.cover}/>
+                                <h6>{authorBook2}</h6>
+                                </div>
+                            }
+                            
                         })
                     }
 
